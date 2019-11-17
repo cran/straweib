@@ -1,3 +1,18 @@
+#' Print icweib object
+#'
+#' This function prints the summary of the fitting results from icweib.
+#'
+#' @param x output returned by icweib function.
+#' @param digits digits to print.
+#' @param ... other arguments to be passed from print function.
+#'
+#' @export
+#'
+#' @examples
+#' data(tooth24)
+#' fit <- icweib(L = left, R = right, data = tooth24, strata = dmf, covariates = ~sex)
+#' fit
+#'
 print.icweib <-
 function(x, digits=3, ...) {
   cat("Total observations used:", x$ns[1])
@@ -6,11 +21,11 @@ function(x, digits=3, ...) {
                   "NOTE: 0/Inf are used for left/right censoring instead of NA\n", sep="")
   if (x$ns[3] > 0) {
     cat("\nCoefficients: \n")
-    print(x$coef, digits=digits, ...)  	
+    print(x$coef, digits=digits, ...)
   }
   cat("\nWeibull parameters - gamma(shape), lambda(scale): \n")
   print(x$weib, digits=digits, row.names=F, ...)
-  if (x$ns[2]>1) {	
+  if (x$ns[2]>1) {
   cat("\nTest of proportional hazards for strata (H0: all strata's shape parameters are equal):\n")
   print(x$stratatest, digits=digits, row.names=F, ...)
   }
